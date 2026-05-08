@@ -1,0 +1,10 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`MUI theme matches palette and typography snapshot 1`] = `
+{
+  "bgDefault": "#1C1C1E",
+  "fontFamily": ""JetBrains Mono", "Fira Code", "Courier New", monospace",
+  "primaryMain": "#2C2C2E",
+  "secondaryMain": "#D4813A",
+}
+`;
