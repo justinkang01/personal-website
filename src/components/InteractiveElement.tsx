@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Box, ButtonBase } from '@mui/material';
+import { ButtonBase } from '@mui/material';
 import { useAudio } from '../context/AudioContext';
 
 export interface InteractiveElementProps {
