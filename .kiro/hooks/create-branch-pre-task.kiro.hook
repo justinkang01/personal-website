@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Create Branch Before Task",
+  "description": "Creates a new git branch named after the task before execution begins",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before starting this task, check the current git branch. Then create a new branch for this task using the format `task/{task-id-slugified}` (e.g. task 1 becomes `task/1-scaffold-project`, task 2.1 becomes `task/2-1-data-models`). Use `git checkout -b {branch-name}` to create and switch to the branch. If the branch already exists, switch to it with `git checkout {branch-name}`. Report the branch name you created or switched to."
+  }
+}

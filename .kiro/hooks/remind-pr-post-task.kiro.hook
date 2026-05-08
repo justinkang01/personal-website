@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Remind PR After Task",
+  "description": "Reminds the user to open a pull request after a task completes",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "This task is complete. Remind the user to commit their changes with `git add . && git commit -m \"feat: [task description]\"`, push the branch with `git push -u origin [branch-name]`, and open a pull request on GitHub. Keep it brief."
+  }
+}
