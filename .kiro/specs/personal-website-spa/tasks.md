@@ -199,6 +199,11 @@ Incrementally build a React + MUI single-page application that blends mechanical
   - Wire into `App.tsx`
   - _Requirements: 11 (placeholder)_
 
+- [x] 14.5 Fix smooth scroll on "View My Work" CTA
+  - Remove `window.location.hash` assignment from `HeroSection` `scrollToPortfolio` to prevent instant jump overriding smooth scroll
+  - Add `scrollMarginTop: '64px'` to the `#portfolio` section in `App.tsx` to account for the sticky navbar height
+  - _Requirements: 2.3_
+
 - [ ] 15. Responsive design and accessibility polish
   - [ ] 15.1 Audit all sections for semantic HTML (`<nav>`, `<main>`, `<section>`, `<article>`)
     - _Requirements: 10.5_
