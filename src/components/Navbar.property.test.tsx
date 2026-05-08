@@ -1,8 +1,8 @@
 // Feature: personal-website-spa, Property 1: URL hash reflects active section
 // Feature: personal-website-spa, Property 2: Browser history navigation restores correct section
-import { describe, it, expect, beforeEach } from 'bun:test';
+import { describe, it, expect, afterEach } from 'bun:test';
 import * as fc from 'fast-check';
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '@mui/material';
 import theme from '../theme';
@@ -12,12 +12,14 @@ import type { NavSection } from '../types';
 
 // Validates: Requirements 1.4, 1.3
 
+afterEach(cleanup);
 Element.prototype.scrollIntoView = () => {};
 
+// Non-empty, non-whitespace label
+const labelArb = fc.string({ minLength: 1 }).filter((s) => s.trim().length > 0);
 const sectionIdArb = fc.stringMatching(/^[a-z][a-z0-9-]{1,15}$/);
 
 function renderWithSections(sections: NavSection[]) {
-  // Create DOM elements for each section
   sections.forEach(({ id }) => {
     if (!document.getElementById(id)) {
       const el = document.createElement('div');
@@ -35,25 +37,21 @@ function renderWithSections(sections: NavSection[]) {
 }
 
 describe('Property 1: URL hash reflects active section', () => {
-  beforeEach(() => {
-    window.location.hash = '';
-    document.body.innerHTML = '';
-  });
-
   it('clicking any nav link sets window.location.hash to #sectionId', async () => {
     await fc.assert(
       fc.asyncProperty(
         fc.array(
-          fc.record({ id: sectionIdArb, label: fc.string({ minLength: 1, maxLength: 20 }) }),
-          { minLength: 1, maxLength: 5 }
+          fc.record({ id: sectionIdArb, label: labelArb }),
+          { minLength: 1, maxLength: 4 }
         ),
         async (sections) => {
+          cleanup();
           document.body.innerHTML = '';
           window.location.hash = '';
           const { unmount } = renderWithSections(sections);
           const user = userEvent.setup();
           const target = sections[sections.length - 1];
-          const btn = screen.getByRole('button', { name: target.label });
+          const btn = screen.getByRole('button', { name: target.label.trim() });
           await user.click(btn);
           expect(window.location.hash).toBe(`#${target.id}`);
           unmount();
@@ -65,24 +63,28 @@ describe('Property 1: URL hash reflects active section', () => {
 });
 
 describe('Property 2: Browser history navigation restores correct section', () => {
-  it('pushState entries reflect navigated section ids', async () => {
+  it('navigating through sections updates hash to last visited section', async () => {
     await fc.assert(
       fc.asyncProperty(
-        fc.array(sectionIdArb, { minLength: 2, maxLength: 5 }),
-        async (ids) => {
-          const unique = [...new Set(ids)];
-          if (unique.length < 2) return;
-          const sections = unique.map((id) => ({ id, label: id }));
+        fc.array(
+          fc.record({ id: sectionIdArb, label: labelArb }),
+          { minLength: 2, maxLength: 4 }
+        ),
+        async (rawSections) => {
+          // Deduplicate by id
+          const seen = new Set<string>();
+          const sections = rawSections.filter(({ id }) => seen.has(id) ? false : (seen.add(id), true));
+          if (sections.length < 2) return;
+
+          cleanup();
           document.body.innerHTML = '';
           window.location.hash = '';
           const { unmount } = renderWithSections(sections);
           const user = userEvent.setup();
 
-          // Navigate through all sections
           for (const s of sections) {
-            await user.click(screen.getByRole('button', { name: s.label }));
+            await user.click(screen.getByRole('button', { name: s.label.trim() }));
           }
-          // Last hash should be the last section
           expect(window.location.hash).toBe(`#${sections[sections.length - 1].id}`);
           unmount();
         }

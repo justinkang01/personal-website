@@ -1,11 +1,13 @@
-import { describe, it, expect } from 'bun:test';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, afterEach } from 'bun:test';
+import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '@mui/material';
 import theme from '../theme';
 import { AudioProvider } from '../context/AudioContext';
 import Navbar from './Navbar';
 import type { NavSection } from '../types';
+
+afterEach(cleanup);
 
 const sections: NavSection[] = [
   { id: 'hero', label: 'Home' },
@@ -25,7 +27,6 @@ function renderNavbar() {
 
 describe('Navbar', () => {
   it('renders all section links on desktop', () => {
-    // Default happy-dom viewport is wide enough for desktop
     renderNavbar();
     sections.forEach((s) => {
       expect(screen.getByRole('button', { name: s.label })).toBeDefined();
@@ -37,7 +38,6 @@ describe('Navbar', () => {
     sections.forEach((s) => {
       const btn = screen.getByRole('button', { name: s.label });
       const tabIndex = btn.getAttribute('tabindex');
-      // tabIndex null means default (0), which is focusable
       expect(tabIndex === null || Number(tabIndex) >= 0).toBe(true);
     });
   });
@@ -48,7 +48,6 @@ describe('Navbar', () => {
   });
 
   it('clicking a nav link updates window.location.hash', async () => {
-    // Stub scrollIntoView
     Element.prototype.scrollIntoView = () => {};
     document.body.innerHTML = '<div id="portfolio"></div>';
     renderNavbar();
