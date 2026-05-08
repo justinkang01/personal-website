@@ -13,7 +13,7 @@ Incrementally build a React + MUI single-page application that blends mechanical
   - Create `src/` directory structure: `components/`, `data/`, `theme/`, `context/`, `hooks/`, `assets/sounds/`, `assets/images/`
   - _Requirements: 1.1_
 
-- [-] 2. Define data models and static project data
+- [x] 2. Define data models and static project data
   - [x] 2.1 Create TypeScript interfaces in `src/types.ts`
     - Define `Project`, `NavSection`, `SoundId`, `AudioState` interfaces exactly as specified in the design
     - _Requirements: 3.1, 3.2, 3.3, 3.7, 3.8_
@@ -21,66 +21,66 @@ Incrementally build a React + MUI single-page application that blends mechanical
     - Include a mix of `theme: 'keyboard'`, `'cooking'`, and `'neutral'` entries
     - Include `repoUrl` and `demoUrl` on some entries and omit on others to exercise optional-link logic
     - _Requirements: 3.1, 3.6_
-  - [ ] 2.3 Write property test for ProjectCard required fields (Property 4)
+  - [x] 2.3 Write property test for ProjectCard required fields (Property 4)
     - **Property 4: ProjectCard renders required fields**
     - **Validates: Requirements 3.2, 3.3**
     - Generate arbitrary `Project` objects with fast-check; assert title, shortDescription, and all technology labels appear in rendered output
 
-- [-] 3. Create MUI theme
-  - [ ] 3.1 Implement `src/theme/index.ts` with custom MUI theme
+- [x] 3. Create MUI theme
+  - [x] 3.1 Implement `src/theme/index.ts` with custom MUI theme
     - Primary palette: deep charcoal / off-white (keyboard aesthetic)
     - Secondary palette: warm amber / terracotta (cooking aesthetic)
     - Typography: monospace font for keyboard elements, rounded sans for cooking elements
     - Custom overrides for `MuiButton`, `MuiCard`, `MuiChip` with keycap-inspired border-radius and shadows
     - _Requirements: 4.1, 4.2, 4.4_
-  - [ ]* 3.2 Write snapshot test for MUI theme object
+  - [x]* 3.2 Write snapshot test for MUI theme object
     - Assert palette and typography tokens match expected values
     - _Requirements: 4.1_
 
-- [ ] 4. Implement AudioProvider and useAudio hook
-  - [ ] 4.1 Create `src/context/AudioContext.tsx`
+- [x] 4. Implement AudioProvider and useAudio hook
+  - [x] 4.1 Create `src/context/AudioContext.tsx`
     - Implement `AudioProvider` with `muted` state, `toggleMute`, and `playSound(soundId)` as described in the design
     - Load `<audio>` elements lazily with `preload="none"`; catch and log audio errors silently; auto-mute on autoplay policy rejection
     - Export `useAudio` hook
     - _Requirements: 5.5, 5.6, 5.7, 5.8_
-  - [ ]* 4.2 Write unit tests for AudioProvider
+  - [x]* 4.2 Write unit tests for AudioProvider
     - `toggleMute` flips muted state; `playSound` is a no-op when muted
     - _Requirements: 5.5, 5.8_
-  - [ ]* 4.3 Write property test for audio theme routing (Property 9)
+  - [x]* 4.3 Write property test for audio theme routing (Property 9)
     - **Property 9: Audio theme routing**
     - **Validates: Requirements 5.6, 5.7**
     - Generate arbitrary `'keyboard' | 'cooking'` theme values; simulate click; assert correct `soundId` is called; assert no-op when muted
 
-- [ ] 5. Implement App shell, HashRouter, and Navbar
-  - [ ] 5.1 Create `src/main.tsx` wiring `ThemeProvider`, `AudioProvider`, and `HashRouter` around `<App />`
+- [x] 5. Implement App shell, HashRouter, and Navbar
+  - [x] 5.1 Create `src/main.tsx` wiring `ThemeProvider`, `AudioProvider`, and `HashRouter` around `<App />`
     - _Requirements: 1.1_
-  - [ ] 5.2 Create `src/App.tsx` as the layout shell
+  - [x] 5.2 Create `src/App.tsx` as the layout shell
     - Render `<Navbar>`, `<HeroSection>`, `<PortfolioSection>`, `<AboutSection>`, `<ContactSection>`, and `<EasterEggTrigger>` in order inside a `<main>` element
     - Each section wrapped in a `<section>` with its hash id as the DOM `id`
     - _Requirements: 1.1, 10.5_
-  - [ ] 5.3 Implement `src/components/Navbar.tsx`
+  - [x] 5.3 Implement `src/components/Navbar.tsx`
     - Accept `NavbarProps` (`sections: NavSection[]`)
     - On ≥ 768px: inline links; on < 768px: hamburger menu using MUI `Drawer`
     - Clicking a link calls `element.scrollIntoView({ behavior: 'smooth' })` and updates `window.location.hash`
     - Keyboard-navigable; all links focusable
     - _Requirements: 1.2, 1.4, 8.3, 10.2_
-  - [ ]* 5.4 Write unit tests for Navbar
+  - [x]* 5.4 Write unit tests for Navbar
     - Renders all section links; collapses to hamburger at < 768px; all links are keyboard-focusable
     - _Requirements: 1.2, 8.3, 10.2_
-  - [ ]* 5.5 Write property test for URL hash (Property 1)
+  - [x]* 5.5 Write property test for URL hash (Property 1)
     - **Property 1: URL hash reflects active section**
     - **Validates: Requirements 1.4**
     - Generate arbitrary section ids; navigate to each; assert `window.location.hash` equals `#${sectionId}`
-  - [ ]* 5.6 Write property test for browser history navigation (Property 2)
+  - [x]* 5.6 Write property test for browser history navigation (Property 2)
     - **Property 2: Browser history navigation restores correct section**
     - **Validates: Requirements 1.3**
     - Generate random navigation sequences; assert back/forward restores the correct section
 
-- [ ] 6. Checkpoint — Ensure all tests pass
+- [x] 6. Checkpoint — Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 7. Implement InteractiveElement
-  - [ ] 7.1 Create `src/components/InteractiveElement.tsx`
+- [x] 7. Implement InteractiveElement
+  - [x] 7.1 Create `src/components/InteractiveElement.tsx`
     - Accept `InteractiveElementProps` (`theme: 'keyboard' | 'cooking'`, `label`, `onActivate?`)
     - Keyboard variant: keycap depression CSS animation + calls `playSound('keyboard-click')`
     - Cooking variant: sizzle/steam CSS animation + calls `playSound('cooking-sizzle')`
@@ -88,28 +88,28 @@ Incrementally build a React + MUI single-page application that blends mechanical
     - Show visible CSS focus indicator on keyboard focus
     - Minimum 44×44px tap area
     - _Requirements: 5.1, 5.3, 5.4, 5.6, 5.7, 8.6, 10.4_
-  - [ ]* 7.2 Write unit tests for InteractiveElement
+  - [x]* 7.2 Write unit tests for InteractiveElement
     - Renders keyboard and cooking variants; graceful degradation when animation API unavailable
     - _Requirements: 5.4_
-  - [ ]* 7.3 Write property test for keyboard animation (Property 7)
+  - [x]* 7.3 Write property test for keyboard animation (Property 7)
     - **Property 7: Keyboard InteractiveElement triggers keycap animation on click**
     - **Validates: Requirements 5.3**
     - Generate arbitrary keyboard `InteractiveElement` props; simulate click; assert animation CSS class/state is applied
-  - [ ]* 7.4 Write property test for focus indicator (Property 16)
+  - [x]* 7.4 Write property test for focus indicator (Property 16)
     - **Property 16: Keyboard-focused InteractiveElement shows focus indicator**
     - **Validates: Requirements 10.4**
     - Generate arbitrary `InteractiveElement` props; simulate Tab focus; assert visible focus indicator CSS is applied
 
-- [ ] 8. Implement HeroSection
-  - [ ] 8.1 Create `src/components/HeroSection.tsx`
+- [x] 8. Implement HeroSection
+  - [x] 8.1 Create `src/components/HeroSection.tsx`
     - Accept `HeroSectionProps` (`ownerName`, `tagline`)
     - Display owner name and tagline; embed a keyboard-themed `<InteractiveElement>`
     - Include a CTA `<Button>` that scrolls to `#portfolio`
     - Single-column layout on viewports < 768px
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 8.9_
 
-- [ ] 9. Implement ProjectCard and PortfolioSection
-  - [ ] 9.1 Create `src/components/ProjectCard.tsx`
+- [x] 9. Implement ProjectCard and PortfolioSection
+  - [x] 9.1 Create `src/components/ProjectCard.tsx`
     - Accept `ProjectCardProps` (`project: Project`)
     - Collapsed state: title, shortDescription, image/icon, technology chips
     - Expanded state (via MUI `Collapse`): full description, tech stack, optional repo/demo links
@@ -119,40 +119,40 @@ Incrementally build a React + MUI single-page application that blends mechanical
     - All images include non-empty `alt` text; below-fold images get `loading="lazy"`
     - Minimum 44×44px tap area on mobile
     - _Requirements: 3.2, 3.3, 3.4, 3.5, 3.7, 3.8, 5.2, 8.6, 8.8, 9.2, 10.1_
-  - [ ]* 9.2 Write unit tests for ProjectCard
+  - [x]* 9.2 Write unit tests for ProjectCard
     - Renders required fields; expands/collapses on click; renders optional links only when data present; renders empty-state gracefully
     - _Requirements: 3.2, 3.3, 3.4, 3.5, 3.7, 3.8_
-  - [ ]* 9.3 Write property test for portfolio card count (Property 3)
+  - [x]* 9.3 Write property test for portfolio card count (Property 3)
     - **Property 3: Portfolio renders one card per project**
     - **Validates: Requirements 3.1**
     - Generate arbitrary `Project` arrays; assert rendered `ProjectCard` count equals array length
-  - [ ]* 9.4 Write property test for ProjectCard expand/collapse round-trip (Property 5)
+  - [x]* 9.4 Write property test for ProjectCard expand/collapse round-trip (Property 5)
     - **Property 5: ProjectCard expand/collapse round-trip**
     - **Validates: Requirements 3.4, 3.5**
     - Generate arbitrary `Project` objects; click to expand; click to collapse; assert back to initial collapsed state
-  - [ ]* 9.5 Write property test for optional project links (Property 6)
+  - [x]* 9.5 Write property test for optional project links (Property 6)
     - **Property 6: Optional project links render when data is present**
     - **Validates: Requirements 3.7, 3.8**
     - Generate `Project` objects with arbitrary combinations of `repoUrl`/`demoUrl`; assert link presence matches data
-  - [ ]* 9.6 Write property test for hover animation (Property 8)
+  - [x]* 9.6 Write property test for hover animation (Property 8)
     - **Property 8: ProjectCard hover triggers themed animation**
     - **Validates: Requirements 5.2**
     - Generate arbitrary `Project` objects; simulate `mouseenter`; assert hover CSS class/style is applied
-  - [ ]* 9.7 Write property test for lazy loading (Property 14)
+  - [x]* 9.7 Write property test for lazy loading (Property 14)
     - **Property 14: Below-fold images are lazy-loaded**
     - **Validates: Requirements 9.2**
     - Generate arbitrary `Project` arrays with images; assert below-fold `<img>` elements have `loading="lazy"`
-  - [ ]* 9.8 Write property test for alt text (Property 15)
+  - [x]* 9.8 Write property test for alt text (Property 15)
     - **Property 15: All images have non-empty alt text**
     - **Validates: Requirements 10.1**
     - Generate arbitrary project/content data; render full app; assert all `<img>` elements have non-empty `alt`
-  - [ ] 9.9 Create `src/components/PortfolioSection.tsx`
+  - [x] 9.9 Create `src/components/PortfolioSection.tsx`
     - Accept `PortfolioSectionProps` (`projects: Project[]`)
     - MUI `Grid`: 3 cols ≥ 900px, 2 cols ≥ 600px, 1 col < 600px
     - Render empty-state message when `projects` is empty
     - _Requirements: 3.1, 3.6, 8.4_
 
-- [ ] 10. Checkpoint — Ensure all tests pass
+- [x] 10. Checkpoint — Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 11. Implement AboutSection
@@ -183,17 +183,17 @@ Incrementally build a React + MUI single-page application that blends mechanical
     - **Validates: Requirements 7.1, 7.2**
     - Generate arbitrary email strings and profiles arrays; assert all appear as anchors with correct `href` values
 
-- [ ] 13. Add mute control and wire audio assets
-  - [ ] 13.1 Add a mute/unmute toggle button to `Navbar` (or a persistent floating control)
+- [x] 13. Add mute control and wire audio assets
+  - [x] 13.1 Add a mute/unmute toggle button to `Navbar` (or a persistent floating control)
     - Reads `muted` and calls `toggleMute` from `useAudio`
     - Minimum 44×44px tap area; keyboard-focusable
     - _Requirements: 5.8, 8.6, 10.2_
-  - [ ] 13.2 Add placeholder audio files to `src/assets/sounds/`
+  - [x] 13.2 Add placeholder audio files to `src/assets/sounds/`
     - `keyboard-click.mp3` and `cooking-sizzle.mp3` (can be silent stubs for prototype)
     - Wire `AudioProvider` to reference these paths
     - _Requirements: 5.6, 5.7_
 
-- [ ] 14. Add EasterEggTrigger stub
+- [x] 14. Add EasterEggTrigger stub
   - Create `src/components/EasterEggTrigger.tsx` as a hidden placeholder
   - Renders nothing visible; logs `"Easter egg triggered — TODO: implement game"` to console on click
   - Wire into `App.tsx`
