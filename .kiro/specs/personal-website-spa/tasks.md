@@ -155,16 +155,16 @@ Incrementally build a React + MUI single-page application that blends mechanical
 - [x] 10. Checkpoint — Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 11. Implement AboutSection
-  - [ ] 11.1 Create `src/components/AboutSection.tsx`
+- [x] 11. Implement AboutSection
+  - [x] 11.1 Create `src/components/AboutSection.tsx`
     - Accept `AboutSectionProps` (`bio`, `interests`, `avatarSrc`)
     - Display biography, interests list, and profile photo/avatar with non-empty `alt`
     - Single-column layout on viewports < 768px
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 8.9, 10.1_
-  - [ ]* 11.2 Write unit tests for AboutSection
+  - [x]* 11.2 Write unit tests for AboutSection
     - Renders bio, interests, and avatar
     - _Requirements: 6.1, 6.2, 6.3_
-  - [ ]* 11.3 Write property test for AboutSection interests (Property 10)
+  - [x]* 11.3 Write property test for AboutSection interests (Property 10)
     - **Property 10: AboutSection renders all interests**
     - **Validates: Requirements 6.2**
     - Generate arbitrary string arrays; assert every string appears in rendered output
