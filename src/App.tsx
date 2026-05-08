@@ -20,7 +20,7 @@ export default function App() {
     <Box component="main">
       <Navbar sections={NAV_SECTIONS} />
       <section id="hero"><HeroSection ownerName="Justin Kang" tagline="Software engineer. Keyboard enthusiast. Home cook." /></section>
-      <section id="portfolio"><PortfolioSection projects={projects} /></section>
+      <section id="portfolio" style={{ scrollMarginTop: '64px' }}><PortfolioSection projects={projects} /></section>
       <section id="about">
         <AboutSection
           bio="Hi, I'm Justin — a software engineer who loves building things, both in code and in the kitchen."

@@ -10,7 +10,6 @@ export default function HeroSection({ ownerName, tagline }: HeroSectionProps) {
   function scrollToPortfolio() {
     const el = document.getElementById('portfolio');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
-    window.location.hash = 'portfolio';
   }
 
   return (
