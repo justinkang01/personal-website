@@ -83,7 +83,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
           {project.shortDescription}
         </Typography>
-        <Stack direction="row" flexWrap="wrap" gap={0.5}>
+        <Stack sx={{ flexWrap: "wrap", flexDirection: "row", gap: 0.5 }}>
           {project.technologies.map((tech) => (
             <Chip key={tech} label={tech} size="small" variant="outlined" />
           ))}

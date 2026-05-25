@@ -45,7 +45,7 @@ export default function AboutSection({ bio, interests, avatarSrc }: AboutSection
             <Typography variant="h6" sx={{ mb: 1.5, fontFamily: 'monospace' }}>
               Interests
             </Typography>
-            <Stack direction="row" flexWrap="wrap" gap={1}>
+            <Stack sx={{ flexWrap: "wrap", flexDirection: "row", gap: 1 }}>
               {interests.map((interest) => {
                 const Icon = INTEREST_ICONS[interest];
                 return (
