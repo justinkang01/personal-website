@@ -169,16 +169,16 @@ Incrementally build a React + MUI single-page application that blends mechanical
     - **Validates: Requirements 6.2**
     - Generate arbitrary string arrays; assert every string appears in rendered output
 
-- [ ] 12. Implement ContactSection
-  - [ ] 12.1 Create `src/components/ContactSection.tsx`
+- [x] 12. Implement ContactSection
+  - [x] 12.1 Create `src/components/ContactSection.tsx`
     - Accept `ContactSectionProps` (`email`, `profiles`)
     - Render `<a href="mailto:{email}">` and one `<a>` per profile
     - Single-column layout on viewports < 768px
     - _Requirements: 7.1, 7.2, 8.9_
-  - [ ]* 12.2 Write unit tests for ContactSection
+  - [x]* 12.2 Write unit tests for ContactSection
     - Renders mailto link with correct email; renders all profile links
     - _Requirements: 7.1, 7.2_
-  - [ ]* 12.3 Write property test for contact links (Property 11)
+  - [x]* 12.3 Write property test for contact links (Property 11)
     - **Property 11: Contact links render for all provided data**
     - **Validates: Requirements 7.1, 7.2**
     - Generate arbitrary email strings and profiles arrays; assert all appear as anchors with correct `href` values
@@ -204,40 +204,40 @@ Incrementally build a React + MUI single-page application that blends mechanical
   - Add `scrollMarginTop: '64px'` to the `#portfolio` section in `App.tsx` to account for the sticky navbar height
   - _Requirements: 2.3_
 
-- [ ] 15. Responsive design and accessibility polish
-  - [ ] 15.1 Audit all sections for semantic HTML (`<nav>`, `<main>`, `<section>`, `<article>`)
+- [x] 15. Responsive design and accessibility polish
+  - [x] 15.1 Audit all sections for semantic HTML (`<nav>`, `<main>`, `<section>`, `<article>`)
     - _Requirements: 10.5_
-  - [ ] 15.2 Verify color contrast ≥ 4.5:1 for primary text/background pairs in MUI theme
+  - [x] 15.2 Verify color contrast ≥ 4.5:1 for primary text/background pairs in MUI theme
     - Add a test that computes contrast ratio from theme tokens and asserts ≥ 4.5:1
     - _Requirements: 10.3_
-  - [ ] 15.3 Verify font sizes scale correctly; set minimum body font size to 16px on mobile
+  - [x] 15.3 Verify font sizes scale correctly; set minimum body font size to 16px on mobile
     - _Requirements: 8.10_
-  - [ ] 15.4 Verify no horizontal overflow at 320px and 2560px viewport widths
+  - [x] 15.4 Verify no horizontal overflow at 320px and 2560px viewport widths
     - _Requirements: 8.2_
-  - [ ]* 15.5 Write property test for no horizontal overflow (Property 12)
+  - [x]* 15.5 Write property test for no horizontal overflow (Property 12)
     - **Property 12: No horizontal overflow at any supported viewport width**
     - **Validates: Requirements 8.2**
     - Generate viewport widths in [320, 2560]; render app; assert `scrollWidth ≤ clientWidth`
-  - [ ]* 15.6 Write property test for touch target size (Property 13)
+  - [x]* 15.6 Write property test for touch target size (Property 13)
     - **Property 13: Touch targets meet minimum size on mobile**
     - **Validates: Requirements 8.6**
     - Generate arbitrary interactive elements at mobile viewport; assert bounding box ≥ 44×44px
 
-- [ ] 16. Integration smoke tests
-  - [ ]* 16.1 Write smoke test: no autoplay audio
+- [x] 16. Integration smoke tests
+  - [x]* 16.1 Write smoke test: no autoplay audio
     - Render full app without user interaction; assert no `audio.play()` calls occur
     - _Requirements: 5.5_
-  - [ ]* 16.2 Write smoke test: semantic HTML elements present
+  - [x]* 16.2 Write smoke test: semantic HTML elements present
     - Render full app; assert `<nav>`, `<main>`, `<section>`, `<article>` elements are present
     - _Requirements: 10.5_
-  - [ ]* 16.3 Write smoke test: 6-card layout renders without overflow
+  - [x]* 16.3 Write smoke test: 6-card layout renders without overflow
     - Render `PortfolioSection` with 6 projects; assert no layout overflow
     - _Requirements: 3.6_
-  - [ ]* 16.4 Write smoke test: mobile breakpoints
+  - [x]* 16.4 Write smoke test: mobile breakpoints
     - Render at 767px and 599px; assert hamburger menu and single-column layout respectively
     - _Requirements: 8.3, 8.4_
 
-- [ ] 17. Final checkpoint — Ensure all tests pass
+- [x] 17. Final checkpoint — Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

@@ -7,7 +7,7 @@ import type { SvgIconComponent } from '@mui/icons-material';
 
 interface AboutSectionProps {
   bio: string;
-  interests: string[];
+  desc: string;
   avatarSrc: string;
 }
 
@@ -18,15 +18,15 @@ const INTEREST_ICONS: Record<string, SvgIconComponent> = {
   Cooking: RestaurantIcon,
 };
 
-export default function AboutSection({ bio, interests, avatarSrc }: AboutSectionProps) {
+export default function AboutSection({ bio, desc, avatarSrc }: AboutSectionProps) {
   return (
-    <Box component="article" sx={{ py: 8, bgcolor: 'background.paper' }}>
+    <Box component="article" sx={{ py: 8, bgcolor: 'background.default' }}>
       <Container maxWidth="md">
         <Box
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
-            alignItems: { xs: 'center', md: 'flex-start' },
+            alignItems: { xs: 'center' },
             gap: 4,
           }}
         >
@@ -42,22 +42,22 @@ export default function AboutSection({ bio, interests, avatarSrc }: AboutSection
             <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.8 }}>
               {bio}
             </Typography>
+            <Typography variant="body2" sx={{ mb: 3, lineHeight: 1.8 }}>
+              {desc}
+            </Typography>
             <Typography variant="h6" sx={{ mb: 1.5, fontFamily: 'monospace' }}>
               Interests
             </Typography>
-            <Stack direction="row" flexWrap="wrap" gap={1}>
-              {interests.map((interest) => {
-                const Icon = INTEREST_ICONS[interest];
-                return (
-                  <Chip
-                    key={interest}
-                    label={interest}
-                    icon={Icon ? <Icon /> : undefined}
-                    variant="outlined"
-                    color="secondary"
-                  />
-                );
-              })}
+            <Stack sx={{ flexWrap: 'wrap', flexDirection: 'row', gap: 1 }}>
+              {Object.entries(INTEREST_ICONS).map(([interest, Icon]) => (
+                <Chip
+                  key={interest}
+                  label={interest}
+                  icon={<Icon />}
+                  variant="outlined"
+                  color="secondary"
+                />
+              ))}
             </Stack>
           </Box>
         </Box>

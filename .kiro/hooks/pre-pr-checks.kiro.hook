@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Pre-PR Checks",
+  "description": "Runs tests, type checking, lint, and formatting before opening a PR",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before opening a pull request, run the following checks in order and stop if any fail:\n1. `npm run format` — auto-format all source files\n2. `npm run lint:fix` — auto-fix lint issues, then report any remaining errors\n3. `npm run build` — verify no TypeScript compilation errors\n4. `npm test` — ensure all tests pass\n\nIf any step fails, report the error output and do not proceed with opening the PR. If all steps pass, confirm and proceed."
+  }
+}

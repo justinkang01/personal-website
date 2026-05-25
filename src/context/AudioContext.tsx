@@ -30,7 +30,6 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     audio.currentTime = 0;
     audio.play().catch((err) => {
       console.warn(`Audio playback failed for ${soundId}:`, err);
-      setMuted(true);
     });
   }
 

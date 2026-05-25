@@ -1,6 +1,5 @@
 // Feature: personal-website-spa, Property 10: AboutSection renders all interests
 import { describe, it, expect, afterEach } from 'bun:test';
-import * as fc from 'fast-check';
 import { render, screen, cleanup } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material';
 import theme from '../theme';
@@ -10,10 +9,10 @@ import AboutSection from './AboutSection';
 
 afterEach(cleanup);
 
-function renderAbout(bio = 'A bio.', interests = ['Guitar', 'Cooking'], avatarSrc = '/avatar.jpg') {
+function renderAbout(bio = 'A bio.', avatarSrc = '/avatar.jpg') {
   return render(
     <ThemeProvider theme={theme}>
-      <AboutSection bio={bio} interests={interests} avatarSrc={avatarSrc} />
+      <AboutSection bio={bio} desc="" avatarSrc={avatarSrc} />
     </ThemeProvider>
   );
 }
@@ -25,7 +24,7 @@ describe('AboutSection', () => {
   });
 
   it('renders all interests as chips', () => {
-    renderAbout('bio', ['Guitar', 'Volleyball', 'Mechanical Keyboards', 'Cooking']);
+    renderAbout();
     expect(screen.getByText('Guitar')).toBeDefined();
     expect(screen.getByText('Volleyball')).toBeDefined();
     expect(screen.getByText('Mechanical Keyboards')).toBeDefined();
@@ -40,23 +39,11 @@ describe('AboutSection', () => {
 });
 
 describe('Property 10: AboutSection renders all interests', () => {
-  it('every interest string appears in the rendered output', () => {
-    fc.assert(
-      fc.property(
-        fc.array(
-          fc.stringMatching(/^[A-Za-z][A-Za-z0-9 ]{0,20}$/),
-          { minLength: 1, maxLength: 8 }
-        ),
-        (interests) => {
-          cleanup();
-          renderAbout('bio', interests);
-          const bodyText = document.body.textContent ?? '';
-          interests.forEach((interest) => {
-            expect(bodyText).toContain(interest.trim());
-          });
-        }
-      ),
-      { numRuns: 100 }
-    );
+  it('all hardcoded interests appear in the rendered output', () => {
+    renderAbout();
+    const bodyText = document.body.textContent ?? '';
+    ['Guitar', 'Volleyball', 'Mechanical Keyboards', 'Cooking'].forEach((interest) => {
+      expect(bodyText).toContain(interest);
+    });
   });
 });
