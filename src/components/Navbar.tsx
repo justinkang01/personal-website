@@ -70,7 +70,17 @@ export default function Navbar({ sections }: NavbarProps) {
                 key={s.id}
                 color="inherit"
                 onClick={() => handleNavClick(s.id)}
-                sx={{ minWidth: 44, minHeight: 44 }}
+                sx={{
+                  minWidth: 44,
+                  minHeight: 44,
+                  border: '1px solid rgba(245,245,240,0.35)',
+                  borderRadius: '6px',
+                  px: 2,
+                  '&:hover': {
+                    bgcolor: 'rgba(245,245,240,0.12)',
+                    borderColor: 'rgba(245,245,240,0.7)',
+                  },
+                }}
               >
                 {s.label}
               </Button>

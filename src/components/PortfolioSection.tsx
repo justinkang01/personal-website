@@ -8,7 +8,7 @@ interface PortfolioSectionProps {
 
 export default function PortfolioSection({ projects }: PortfolioSectionProps) {
   return (
-    <Box component="article" sx={{ py: 8, bgcolor: 'background.default' }}>
+    <Box component="article" sx={{ py: 8, bgcolor: 'background.paper' }}>
       <Container maxWidth="lg">
         <Typography variant="h2" sx={{ mb: 4, fontSize: { xs: '1.75rem', md: '2.5rem' } }}>
           Portfolio
