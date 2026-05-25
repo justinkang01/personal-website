@@ -3,7 +3,7 @@ import type { Project } from '../types';
 export const projects: Project[] = [
   {
     id: 'meal-prep-planner',
-    title: 'Weekly Meal Prep Planner',
+    title: 'Weekly Meal Prep Planner (WIP)',
     shortDescription:
       'Organize weekly meal prep with automated shopping lists, batch cooking schedules, and storage tips.',
     fullDescription:
@@ -16,14 +16,16 @@ export const projects: Project[] = [
   },
   {
     id: 'typing-rhythm-game',
-    title: 'Typing Rhythm Game',
+    title: 'Typing Game',
     shortDescription:
-      'Musical typing game that combines mechanical keyboard sounds with rhythm game mechanics.',
+      'Typing game that combines my interest in mechanical keyboards with my love for cats.',
     fullDescription:
-      'A unique rhythm game where players type to the beat using their mechanical keyboard. Each keypress triggers musical notes, and accuracy is scored based on timing. Features multiple difficulty levels, custom song imports, and leaderboards. Celebrates the tactile and auditory experience of mechanical keyboards.',
-    technologies: ['React', 'TypeScript', 'Tone.js', 'Web Audio API'],
+      'A simple typing simulation game that helps you improve your typing accuracy and speed by roleplaying as a cat in search of fish and food!',
+    technologies: ['HTML', 'JavaScript', 'CSS'],
     imageUrl: '/images/typing-rhythm.png',
-    demoUrl: 'TBD',
+    demoUrl: 'https://justinkang01.github.io/typing/',
+    repoUrl: 'https://github.com/justinkang01/typing/tree/mainline',
+    embeddable: true,
     theme: 'keyboard',
   },
 ];

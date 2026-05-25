@@ -9,6 +9,7 @@ export interface Project {
   imageUrl?: string; // card thumbnail
   repoUrl?: string; // optional GitHub link
   demoUrl?: string; // optional live demo link
+  embeddable?: boolean; // show "Play now" button that opens an iframe modal
   theme?: 'keyboard' | 'cooking' | 'neutral'; // drives card accent color
 }
 

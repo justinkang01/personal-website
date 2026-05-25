@@ -13,7 +13,9 @@ import {
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import type { Project } from '../types';
+import GameModal from './GameModal';
 
 interface ProjectCardProps {
   project: Project;
@@ -31,6 +33,7 @@ const ACCENT: Record<NonNullable<Project['theme']>, string> = {
 export default function ProjectCard({ project }: ProjectCardProps) {
   const [expanded, setExpanded] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const accent = ACCENT[project.theme ?? 'neutral'];
 
@@ -47,7 +50,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         boxShadow: hovered ? '0 8px 24px rgba(0,0,0,0.4)' : '0 4px 12px rgba(0,0,0,0.3)',
         transition: 'transform 0.15s ease, box-shadow 0.15s ease',
       }}
-      onClick={() => setExpanded((e) => !e)}
+      onClick={() => { if (!modalOpen) setExpanded((e) => !e); }}
     >
       {project.imageUrl && (
         <CardMedia
@@ -98,14 +101,26 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </CardContent>
         {(project.repoUrl || project.demoUrl) && (
           <CardActions onClick={(e) => e.stopPropagation()}>
+            {project.embeddable && project.demoUrl && (
+              <Button
+                size="small"
+                color="inherit"
+                onClick={() => setModalOpen(true)}
+                startIcon={<PlayArrowIcon />}
+                sx={{ minWidth: 44, minHeight: 44, border: '1px solid rgba(245,245,240,0.35)', borderRadius: '6px', px: 2, '&:hover': { bgcolor: 'rgba(245,245,240,0.12)', borderColor: 'rgba(245,245,240,0.7)' } }}
+              >
+                Play now
+              </Button>
+            )}
             {project.repoUrl && (
               <Button
                 size="small"
+                color="inherit"
                 href={project.repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 startIcon={<GitHubIcon />}
-                sx={{ minWidth: 44, minHeight: 44 }}
+                sx={{ minWidth: 44, minHeight: 44, border: '1px solid rgba(245,245,240,0.35)', borderRadius: '6px', px: 2, '&:hover': { bgcolor: 'rgba(245,245,240,0.12)', borderColor: 'rgba(245,245,240,0.7)' } }}
               >
                 Source
               </Button>
@@ -113,11 +128,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {project.demoUrl && (
               <Button
                 size="small"
+                color="inherit"
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 startIcon={<OpenInNewIcon />}
-                sx={{ minWidth: 44, minHeight: 44 }}
+                sx={{ minWidth: 44, minHeight: 44, border: '1px solid rgba(245,245,240,0.35)', borderRadius: '6px', px: 2, '&:hover': { bgcolor: 'rgba(245,245,240,0.12)', borderColor: 'rgba(245,245,240,0.7)' } }}
               >
                 Demo
               </Button>
@@ -125,6 +141,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </CardActions>
         )}
       </Collapse>
+      {project.embeddable && project.demoUrl && (
+        <GameModal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          url={project.demoUrl}
+          title={project.title}
+        />
+      )}
     </Card>
   );
 }
