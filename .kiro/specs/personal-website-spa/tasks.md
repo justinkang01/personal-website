@@ -169,8 +169,8 @@ Incrementally build a React + MUI single-page application that blends mechanical
     - **Validates: Requirements 6.2**
     - Generate arbitrary string arrays; assert every string appears in rendered output
 
-- [ ] 12. Implement ContactSection
-  - [ ] 12.1 Create `src/components/ContactSection.tsx`
+- [x] 12. Implement ContactSection
+  - [x] 12.1 Create `src/components/ContactSection.tsx`
     - Accept `ContactSectionProps` (`email`, `profiles`)
     - Render `<a href="mailto:{email}">` and one `<a>` per profile
     - Single-column layout on viewports < 768px

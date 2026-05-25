@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import {
-  Card, CardContent, CardActions, CardMedia,
-  Typography, Chip, Collapse, Button, Box, Stack,
+  Card,
+  CardContent,
+  CardActions,
+  CardMedia,
+  Typography,
+  Chip,
+  Collapse,
+  Button,
+  Box,
+  Stack,
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -11,7 +19,8 @@ interface ProjectCardProps {
   project: Project;
 }
 
-const PLACEHOLDER_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%232C2C2E'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23AEAEB2' font-size='14'%3ENo image%3C/text%3E%3C/svg%3E";
+const PLACEHOLDER_SVG =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%232C2C2E'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23AEAEB2' font-size='14'%3ENo image%3C/text%3E%3C/svg%3E";
 
 const ACCENT: Record<NonNullable<Project['theme']>, string> = {
   keyboard: '#48484A',
@@ -35,9 +44,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         cursor: 'pointer',
         borderTop: `3px solid ${accent}`,
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: hovered
-          ? '0 8px 24px rgba(0,0,0,0.4)'
-          : '0 4px 12px rgba(0,0,0,0.3)',
+        boxShadow: hovered ? '0 8px 24px rgba(0,0,0,0.4)' : '0 4px 12px rgba(0,0,0,0.3)',
         transition: 'transform 0.15s ease, box-shadow 0.15s ease',
       }}
       onClick={() => setExpanded((e) => !e)}
@@ -56,14 +63,23 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       )}
       {!project.imageUrl && (
         <Box
-          sx={{ height: 80, bgcolor: accent, opacity: 0.3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          sx={{
+            height: 80,
+            bgcolor: accent,
+            opacity: 0.3,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
           role="img"
           aria-label={`${project.title} placeholder`}
         />
       )}
 
       <CardContent>
-        <Typography variant="h6" gutterBottom>{project.title}</Typography>
+        <Typography variant="h6" gutterBottom>
+          {project.title}
+        </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
           {project.shortDescription}
         </Typography>
@@ -76,7 +92,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       <Collapse in={expanded} unmountOnExit>
         <CardContent sx={{ pt: 0 }}>
-          <Typography variant="body2" sx={{ mb: 2 }}>{project.fullDescription}</Typography>
+          <Typography variant="body2" sx={{ mb: 2 }}>
+            {project.fullDescription}
+          </Typography>
         </CardContent>
         {(project.repoUrl || project.demoUrl) && (
           <CardActions onClick={(e) => e.stopPropagation()}>
