@@ -2,19 +2,6 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
-    id: 'meal-prep-planner',
-    title: 'Weekly Meal Prep Planner (WIP)',
-    shortDescription:
-      'Organize weekly meal prep with automated shopping lists, batch cooking schedules, and storage tips.',
-    fullDescription:
-      'A meal planning tool designed for batch cooking enthusiasts. Plan your week, generate consolidated shopping lists, get optimal cooking order suggestions, and track container storage. Includes timer management for parallel cooking tasks and leftover tracking.',
-    technologies: ['React', 'TypeScript', 'IndexedDB', 'PWA'],
-    imageUrl: '/images/meal-prep.png',
-    repoUrl: 'https://github.com/example/TBD',
-    demoUrl: 'TBD',
-    theme: 'cooking',
-  },
-  {
     id: 'typing-rhythm-game',
     title: 'Typing Game',
     shortDescription:
@@ -27,5 +14,31 @@ export const projects: Project[] = [
     repoUrl: 'https://github.com/justinkang01/typing/tree/mainline',
     embeddable: true,
     theme: 'keyboard',
+  },
+  {
+    id: 'home-menu',
+    title: 'Home Menu',
+    shortDescription:
+      'Menu and order tracker for home cafes — host creates a menu, guests order and watch status live.',
+    fullDescription:
+      'A simple menu and order tracker for home cafes: one person hosts, everyone else orders. The host creates a menu and gets a private admin link to manage items and watch orders come in live; guests open a public link (or scan a QR code), enter their name once, and place orders — no accounts, no passwords, no payments. Orders flow from pending to preparing to served, with both host and guests seeing status updates live via Supabase Realtime.',
+    technologies: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS'],
+    imageUrl: '/images/home-menu.png',
+    repoUrl: 'https://github.com/justinkang01/home-menu',
+    demoUrl: 'https://home-menu-production.up.railway.app/',
+    theme: 'cooking',
+  },
+  {
+    id: 'meal-prep-planner',
+    title: 'Weekly Meal Prep Planner (WIP)',
+    shortDescription:
+      'Organize weekly meal prep with automated shopping lists, batch cooking schedules, and storage tips.',
+    fullDescription:
+      'A meal planning tool designed for batch cooking enthusiasts. Plan your week, generate consolidated shopping lists, get optimal cooking order suggestions, and track container storage. Includes timer management for parallel cooking tasks and leftover tracking.',
+    technologies: ['React', 'TypeScript', 'IndexedDB', 'PWA'],
+    imageUrl: '/images/meal-prep.png',
+    repoUrl: 'https://github.com/example/TBD',
+    demoUrl: 'TBD',
+    theme: 'cooking',
   },
 ];
