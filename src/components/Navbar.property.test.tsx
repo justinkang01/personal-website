@@ -19,6 +19,13 @@ Element.prototype.scrollIntoView = () => {};
 const labelArb = fc.string({ minLength: 1 }).filter((s) => s.trim().length > 0);
 const sectionIdArb = fc.stringMatching(/^[a-z][a-z0-9-]{1,15}$/);
 
+// The browser's accessible-name computation collapses runs of internal whitespace to a
+// single space, so `getByRole(..., { name })` must be queried with the same normalization
+// as what the rendered label text resolves to, not the raw label.
+function normalizeAccessibleName(label: string): string {
+  return label.trim().replace(/\s+/g, ' ');
+}
+
 function renderWithSections(sections: NavSection[]) {
   sections.forEach(({ id }) => {
     if (!document.getElementById(id)) {
@@ -51,7 +58,7 @@ describe('Property 1: URL hash reflects active section', () => {
           const { unmount } = renderWithSections(sections);
           const user = userEvent.setup();
           const target = sections[sections.length - 1];
-          const btn = screen.getByRole('button', { name: target.label.trim() });
+          const btn = screen.getByRole('button', { name: normalizeAccessibleName(target.label) });
           await user.click(btn);
           expect(window.location.hash).toBe(`#${target.id}`);
           unmount();
@@ -83,7 +90,7 @@ describe('Property 2: Browser history navigation restores correct section', () =
           const user = userEvent.setup();
 
           for (const s of sections) {
-            await user.click(screen.getByRole('button', { name: s.label.trim() }));
+            await user.click(screen.getByRole('button', { name: normalizeAccessibleName(s.label) }));
           }
           expect(window.location.hash).toBe(`#${sections[sections.length - 1].id}`);
           unmount();

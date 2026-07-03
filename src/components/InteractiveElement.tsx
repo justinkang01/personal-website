@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { ButtonBase } from '@mui/material';
 import { useAudio } from '../context/AudioContext';
 
@@ -19,6 +19,11 @@ function prefersReducedMotion(): boolean {
 export default function InteractiveElement({ theme, label, onActivate }: InteractiveElementProps) {
   const { playSound } = useAudio();
   const [active, setActive] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
 
   const handleClick = useCallback(() => {
     const soundId = theme === 'keyboard' ? 'keyboard-click' : 'cooking-sizzle';
@@ -27,7 +32,8 @@ export default function InteractiveElement({ theme, label, onActivate }: Interac
 
     if (!prefersReducedMotion()) {
       setActive(true);
-      setTimeout(() => setActive(false), 150);
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => setActive(false), 150);
     }
   }, [theme, playSound, onActivate]);
 

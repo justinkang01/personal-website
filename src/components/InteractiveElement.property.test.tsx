@@ -20,6 +20,13 @@ mock.module('../context/AudioContext', () => ({
 
 const labelArb = fc.string({ minLength: 1 }).filter((s) => s.trim().length > 0);
 
+// The browser's accessible-name computation collapses runs of internal whitespace to a
+// single space, so `getByRole(..., { name })` must be queried with the same normalization
+// as what `aria-label` renders to, not the raw label.
+function normalizeAccessibleName(label: string): string {
+  return label.trim().replace(/\s+/g, ' ');
+}
+
 function renderEl(elTheme: 'keyboard' | 'cooking', label: string) {
   return render(
     <ThemeProvider theme={theme}>
@@ -36,7 +43,7 @@ describe('Property 7: Keyboard InteractiveElement triggers keycap animation on c
       fc.asyncProperty(labelArb, async (label) => {
         cleanup();
         renderEl('keyboard', label.trim());
-        const btn = screen.getByRole('button', { name: label.trim() });
+        const btn = screen.getByRole('button', { name: normalizeAccessibleName(label) });
         // Before click: not active
         expect(btn.getAttribute('data-active')).toBe('false');
         // Click and immediately check active state
@@ -61,7 +68,7 @@ describe('Property 16: Keyboard-focused InteractiveElement shows focus indicator
           cleanup();
           const trimmed = label.trim();
           renderEl(elTheme, trimmed);
-          const btn = screen.getByRole('button', { name: trimmed });
+          const btn = screen.getByRole('button', { name: normalizeAccessibleName(trimmed) });
           // MUI ButtonBase applies focus-visible styles via CSS class / sx prop
           // Verify the element is focusable (tabIndex >= 0) as a proxy for focus indicator support
           const tabIndex = btn.getAttribute('tabindex');
