@@ -7,9 +7,11 @@ import { AudioProvider, useAudio } from './AudioContext';
 // Validates: Requirements 5.6, 5.7
 
 const mockPlay = mock(() => Promise.resolve());
-(globalThis as unknown as { Audio: unknown }).Audio = mock(
-  () => ({ play: mockPlay, currentTime: 0, preload: '' })
-);
+(globalThis as unknown as { Audio: unknown }).Audio = mock(() => ({
+  play: mockPlay,
+  currentTime: 0,
+  preload: '',
+}));
 
 function wrapper({ children }: { children: React.ReactNode }) {
   return <AudioProvider>{children}</AudioProvider>;

@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import {
-  AppBar, Toolbar, Typography, Button, IconButton,
-  Drawer, List, ListItemButton, ListItemText, Box, useMediaQuery, useTheme,
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
+  Box,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -24,6 +34,7 @@ export default function Navbar({ sections }: NavbarProps) {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
+    // eslint-disable-next-line react-hooks/immutability -- runs only inside a click handler, never during render; hash-based routing requires this write (Property 1)
     window.location.hash = id;
     setDrawerOpen(false);
   }

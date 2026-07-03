@@ -35,7 +35,10 @@ export default function HeroSection({ ownerName, tagline }: HeroSectionProps) {
             <Typography variant="h1" sx={{ fontSize: { xs: '2rem', md: '3.5rem' }, mb: 2 }}>
               {ownerName}
             </Typography>
-            <Typography variant="body1" sx={{ fontSize: '1.25rem', color: 'text.secondary', mb: 4 }}>
+            <Typography
+              variant="body1"
+              sx={{ fontSize: '1.25rem', color: 'text.secondary', mb: 4 }}
+            >
               {tagline}
             </Typography>
             <Button

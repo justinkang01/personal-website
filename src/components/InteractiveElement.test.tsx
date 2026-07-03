@@ -9,9 +9,11 @@ import InteractiveElement from './InteractiveElement';
 afterEach(cleanup);
 
 const mockPlay = mock(() => Promise.resolve());
-(globalThis as unknown as { Audio: unknown }).Audio = mock(
-  () => ({ play: mockPlay, currentTime: 0, preload: '' })
-);
+(globalThis as unknown as { Audio: unknown }).Audio = mock(() => ({
+  play: mockPlay,
+  currentTime: 0,
+  preload: '',
+}));
 
 function renderEl(elTheme: 'keyboard' | 'cooking', label = 'test') {
   return render(

@@ -40,6 +40,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- context provider + hook are intentionally colocated
 export function useAudio(): AudioContextValue {
   const ctx = useContext(AudioContext);
   if (!ctx) throw new Error('useAudio must be used within AudioProvider');

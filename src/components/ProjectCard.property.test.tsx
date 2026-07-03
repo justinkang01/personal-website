@@ -25,11 +25,16 @@ const projectArb: fc.Arbitrary<Project> = fc.record({
   title: fc.string({ minLength: 1, maxLength: 60 }).filter((s) => s.trim().length > 0),
   shortDescription: fc.string({ minLength: 1, maxLength: 120 }).filter((s) => s.trim().length > 0),
   fullDescription: fc.string({ minLength: 1 }).filter((s) => s.trim().length > 0),
-  technologies: fc.array(fc.string({ minLength: 1 }).filter((s) => s.trim().length > 0), { minLength: 1, maxLength: 5 }),
+  technologies: fc.array(
+    fc.string({ minLength: 1 }).filter((s) => s.trim().length > 0),
+    { minLength: 1, maxLength: 5 }
+  ),
   imageUrl: fc.option(fc.constant('/images/test.png'), { nil: undefined }),
   repoUrl: fc.option(fc.constant('https://github.com/example/repo'), { nil: undefined }),
   demoUrl: fc.option(fc.constant('https://demo.example.com'), { nil: undefined }),
-  theme: fc.option(fc.constantFrom('keyboard' as const, 'cooking' as const, 'neutral' as const), { nil: undefined }),
+  theme: fc.option(fc.constantFrom('keyboard' as const, 'cooking' as const, 'neutral' as const), {
+    nil: undefined,
+  }),
 });
 
 function wrap(children: React.ReactNode) {
@@ -144,7 +149,10 @@ describe('Property 15: All images have non-empty alt text', () => {
   it('every img element has a non-empty alt attribute', () => {
     fc.assert(
       fc.property(
-        fc.array(projectArb.filter((p) => p.imageUrl !== undefined), { minLength: 1, maxLength: 4 }),
+        fc.array(
+          projectArb.filter((p) => p.imageUrl !== undefined),
+          { minLength: 1, maxLength: 4 }
+        ),
         (projects) => {
           cleanup();
           wrap(<PortfolioSection projects={projects} />);

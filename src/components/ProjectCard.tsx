@@ -50,7 +50,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         boxShadow: hovered ? '0 8px 24px rgba(0,0,0,0.4)' : '0 4px 12px rgba(0,0,0,0.3)',
         transition: 'transform 0.15s ease, box-shadow 0.15s ease',
       }}
-      onClick={() => { if (!modalOpen) setExpanded((e) => !e); }}
+      onClick={() => {
+        if (!modalOpen) setExpanded((e) => !e);
+      }}
     >
       {project.imageUrl && (
         <CardMedia
@@ -86,7 +88,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
           {project.shortDescription}
         </Typography>
-        <Stack sx={{ flexWrap: "wrap", flexDirection: "row", gap: 0.5 }}>
+        <Stack sx={{ flexWrap: 'wrap', flexDirection: 'row', gap: 0.5 }}>
           {project.technologies.map((tech, index) => (
             <Chip key={`${tech}-${index}`} label={tech} size="small" variant="outlined" />
           ))}
@@ -107,7 +109,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 color="inherit"
                 onClick={() => setModalOpen(true)}
                 startIcon={<PlayArrowIcon />}
-                sx={{ minWidth: 44, minHeight: 44, border: '1px solid rgba(245,245,240,0.35)', borderRadius: '6px', px: 2, '&:hover': { bgcolor: 'rgba(245,245,240,0.12)', borderColor: 'rgba(245,245,240,0.7)' } }}
+                sx={{
+                  minWidth: 44,
+                  minHeight: 44,
+                  border: '1px solid rgba(245,245,240,0.35)',
+                  borderRadius: '6px',
+                  px: 2,
+                  '&:hover': {
+                    bgcolor: 'rgba(245,245,240,0.12)',
+                    borderColor: 'rgba(245,245,240,0.7)',
+                  },
+                }}
               >
                 Play now
               </Button>
@@ -120,7 +132,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 startIcon={<GitHubIcon />}
-                sx={{ minWidth: 44, minHeight: 44, border: '1px solid rgba(245,245,240,0.35)', borderRadius: '6px', px: 2, '&:hover': { bgcolor: 'rgba(245,245,240,0.12)', borderColor: 'rgba(245,245,240,0.7)' } }}
+                sx={{
+                  minWidth: 44,
+                  minHeight: 44,
+                  border: '1px solid rgba(245,245,240,0.35)',
+                  borderRadius: '6px',
+                  px: 2,
+                  '&:hover': {
+                    bgcolor: 'rgba(245,245,240,0.12)',
+                    borderColor: 'rgba(245,245,240,0.7)',
+                  },
+                }}
               >
                 Source
               </Button>
@@ -133,7 +155,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 startIcon={<OpenInNewIcon />}
-                sx={{ minWidth: 44, minHeight: 44, border: '1px solid rgba(245,245,240,0.35)', borderRadius: '6px', px: 2, '&:hover': { bgcolor: 'rgba(245,245,240,0.12)', borderColor: 'rgba(245,245,240,0.7)' } }}
+                sx={{
+                  minWidth: 44,
+                  minHeight: 44,
+                  border: '1px solid rgba(245,245,240,0.35)',
+                  borderRadius: '6px',
+                  px: 2,
+                  '&:hover': {
+                    bgcolor: 'rgba(245,245,240,0.12)',
+                    borderColor: 'rgba(245,245,240,0.7)',
+                  },
+                }}
               >
                 Demo
               </Button>

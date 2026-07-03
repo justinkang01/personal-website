@@ -4,13 +4,13 @@ const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#2C2C2E',    // deep charcoal (keyboard)
+      main: '#2C2C2E', // deep charcoal (keyboard)
       light: '#48484A',
       dark: '#1C1C1E',
       contrastText: '#F5F5F0', // off-white
     },
     secondary: {
-      main: '#D4813A',    // warm amber (cooking)
+      main: '#D4813A', // warm amber (cooking)
       light: '#E8A96A',
       dark: '#A85C1E',
       contrastText: '#1C1C1E',

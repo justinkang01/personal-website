@@ -47,10 +47,7 @@ describe('Property 1: URL hash reflects active section', () => {
   it('clicking any nav link sets window.location.hash to #sectionId', async () => {
     await fc.assert(
       fc.asyncProperty(
-        fc.array(
-          fc.record({ id: sectionIdArb, label: labelArb }),
-          { minLength: 1, maxLength: 4 }
-        ),
+        fc.array(fc.record({ id: sectionIdArb, label: labelArb }), { minLength: 1, maxLength: 4 }),
         async (sections) => {
           cleanup();
           document.body.innerHTML = '';
@@ -73,14 +70,13 @@ describe('Property 2: Browser history navigation restores correct section', () =
   it('navigating through sections updates hash to last visited section', async () => {
     await fc.assert(
       fc.asyncProperty(
-        fc.array(
-          fc.record({ id: sectionIdArb, label: labelArb }),
-          { minLength: 2, maxLength: 4 }
-        ),
+        fc.array(fc.record({ id: sectionIdArb, label: labelArb }), { minLength: 2, maxLength: 4 }),
         async (rawSections) => {
           // Deduplicate by id
           const seen = new Set<string>();
-          const sections = rawSections.filter(({ id }) => seen.has(id) ? false : (seen.add(id), true));
+          const sections = rawSections.filter(({ id }) =>
+            seen.has(id) ? false : (seen.add(id), true)
+          );
           if (sections.length < 2) return;
 
           cleanup();
@@ -90,7 +86,9 @@ describe('Property 2: Browser history navigation restores correct section', () =
           const user = userEvent.setup();
 
           for (const s of sections) {
-            await user.click(screen.getByRole('button', { name: normalizeAccessibleName(s.label) }));
+            await user.click(
+              screen.getByRole('button', { name: normalizeAccessibleName(s.label) })
+            );
           }
           expect(window.location.hash).toBe(`#${sections[sections.length - 1].id}`);
           unmount();
